@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Fish Feeding & Monitoring System</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/logo.jpg" sizes="16x16">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <a href="https://storyset.com/technology"></a>
+</head>
+
+<style>
+    * {
+        color: rgb(0, 0, 0);
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    html{
+        scroll-behavior: smooth; 
+    }
+
+    body {
+        background: linear-gradient(to bottom, #3e9bde, #2a8edc);
+        margin: 0;
+        padding-top: 80px;
+    }
+
+    .navbar-expand-lg {
+        padding: 10px 30px;
+        background: #7ea5e0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .firstpage_container,
+    .secoundpage_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 50px auto;
+        padding: 20px;
+        max-width: 1200px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .box1 {
+        margin: 20px;
+        max-width: 500px;
+    }
+
+    #gif1,
+    #gif2 {
+        margin: 20px;
+        width: 400px;
+        height: auto;
+    }
+
+    .components_container,
+    .Showcase_container {
+        margin: 50px auto;
+        padding: 20px;
+        max-width: 1200px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 600px) {
+    .cover .list {
+        justify-content: space-around; /* Adjust spacing for small screens */
+    }
+
+    .cover .list img, .cover .list video {
+        width: calc(50% - 20px); /* Set width to 50% with margin consideration for 2 items */
+        max-width: none; /* Remove max-width constraint */
+    }
+
+    /* If you want to set it to 1 item per row for even smaller screens */
+    @media (max-width: 400px) {
+        .cover .list img, .cover .list video {
+            width: 100%; /* Make images and videos full width on very small screens */
+        }
+    }
+}
+
+    .boxes {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        margin: 15px;
+        padding: 20px;
+        flex-basis: 30%;
+        text-align: center;
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 12px;
+        background: #f3f4f6;
+    }
+
+    .list {
+        columns: 3;
+        column-gap: 20px;
+    }
+
+    .list img,
+    .list video {
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link {
+        position: relative;
+        text-decoration: none;
+        color: #000;
+        padding-bottom: 5px;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background-color: rgb(0, 0, 0);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .firstpage_container,
+        .secoundpage_container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #gif1,
+        #gif2 {
+            width: 100%;
+        }
+
+        .box1 {
+            margin: 0;
+        }
+
+        .boxes {
+            flex-direction: column;
+        }
+    }
+    .carousel-inner img {
+    height: 400px; /* Set your desired height */
+    width: 100%; /* Ensure the width is 100% of the container */
+    object-fit: cover; /* Ensures the image covers the space without distortion */
+}
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjust the alignment */
+    gap: 20px; /* Space between boxes */
+}
+
+.box {
+    width: 150px; /* Set a fixed width for uniformity */
+    text-align: center; /* Center text and image */
+}
+
+.box img {
+    width: 100%; /* Make image take full width of the box */
+    height: 150px; /* Set a common height */
+    object-fit: cover; /* Ensure images cover the entire area */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+#sidePanel {
+    transition: all 0.3s; /* Smooth transition */
+}
+
+#sidePanel h5 {
+    margin-top: 0;
+}
+
+#sidePanel button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sidePanel button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+.secoundpage_container {
+    position: relative; /* Keeps the layout relative for positioning */
+    padding: 40px; /* Increased padding for larger screens */
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.feature-box {
+    background-color: #f8f9fa; /* Light background for each feature box */
+    border: 1px solid #e0e0e0; /* Subtle border */
+    border-radius: 10px; /* Rounded corners for feature boxes */
+    padding: 25px; /* Increased padding inside the box */
+    margin: 15px; /* Increased space between boxes */
+    transition: transform 0.3s; /* Smooth scale transition */
+}
+
+.feature-box:hover {
+    transform: scale(1.05); /* Scale up on hover for a nice effect */
+}
+
+h3 {
+    color: #007bff; /* Bootstrap primary color for headings */
+}
+
+.text-center {
+    margin-bottom: 30px; /* Increased space between sections */
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    .secoundpage_container {
+        padding: 60px; /* More padding on larger screens */
+    }
+
+    .feature-box {
+        margin: 20px; /* More margin for boxes on larger screens */
+    }
+
+    .feature-box h3 {
+        font-size: 1.5rem; /* Larger headings on bigger screens */
+    }
+
+    .feature-box p {
+        font-size: 1.1rem; /* Slightly larger paragraph text */
+    }
+}
+.additional_container {
+    padding: 40px; /* Padding for the new container */
+    background-color: rgba(240, 248, 255, 0.9); /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.additional_container h2 {
+    color: #007bff; /* Bootstrap primary color for headings */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.additional_container ul {
+    list-style-type: none; /* No bullets */
+    padding: 0; /* No padding */
+}
+
+.additional_container li {
+    margin: 5px 0; /* Space between list items */
+}
+
+.additional_container img {
+    margin-top: 15px; /* Space above images */
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+.active {
+            font-weight: bold; /* Highlight the active link */
+            color: #007bff;
+}
+
+.logo  {
+    height: 50px; /* Adjust height as needed */
+}
+/* styles.css */
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: left;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-section h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-section p {
+    line-height: 1.5;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid #fff;
+    padding-top: 10px;
+}
+
+</style>
+
+<body>
+    <!--Nav bar start-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="img21">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.jpg" class="logo"><p>TeachSphere</p>
+            </a>
+           </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-5">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#project">Project</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#Component">Project Components</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Nav bar end-->
+
+    <!-- First explain -->
+    <div class="firstpage_container">
+        <div class="box1">
+            <h1>IoT Enabled Fish Feeding and Water Quality Monitoring System</h1>
+            <br>
+            <p class="para1">The IoT Enabled Fish Feeding and Water Quality Monitoring System is an innovative solution designed to enhance the efficiency and effectiveness of aquaculture practices. With the rapid advancement of Internet of Things (IoT) technology, our project aims to address the critical challenges faced by fish farmers, including feeding accuracy, resource management, and environmental monitoring. This system not only automates fish feeding but also continuously monitors water quality parameters, ensuring a healthy environment for fish growth and productivity. By integrating IoT technologies, we can achieve smarter aquaculture practices, leading to sustainable fish farming and improved yields.</p>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="img/new images/pexels-chevanon-2707010.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="img/new images/pexels-3540573-5301927.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="img/new images/pexels-chris-f-38966-9773818.jpg" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="img/new images/pexels-isaacmijangos-12829697.jpg" alt="Fourth slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="img/new images/pexels-lone-jensen-431642-2156311.jpg" alt="Fifth slide">
+                </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+        
+        </div>
+    </div>
+
+    <!-- Second page explanation -->
+    <div class="secoundpage_container">
+        <!--corasel start-->
+        
+        <!--corasel finish-->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10"> <!-- Use col-lg-10 for larger screens -->
+                    <video id="video1" class="img-fluid" autoplay loop muted style="width: 100%; height: auto;">
+                        <source src="img/new images/2386935-uhd_4096_2160_24fps.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+        
+        
+          
+        <div class="box1">
+            <h1 class="nav-link" id="project">Project Explanation</h1>
+            <br>
+            <p class="para1"><b>for Choosing This Project-</b>  We chose to develop the IoT Enabled Fish Feeding and Water Quality Monitoring System due to the increasing global demand for fish and sustainable aquaculture practices. Traditional methods of fish feeding are often inefficient, leading to overfeeding or underfeeding, which can adversely affect fish health and water quality. Additionally, monitoring water parameters manually is labor-intensive and prone to errors. Our project aims to leverage IoT technology to provide real-time data and automated solutions, addressing these issues effectively while promoting responsible fish farming.</p>
+            <p class="para1"><b>Project Objectives-</b> This project will implement an automated fish feeding system that operates based on real-time data from water quality sensors. The system will monitor critical parameters such as pH, temperature, dissolved oxygen, and turbidity, sending alerts and notifications to farmers via a mobile application. By ensuring optimal feeding schedules and maintaining ideal water conditions, we aim to enhance fish growth rates, reduce feed wastage, and ultimately improve overall farm productivity.</p>
+           
+        </div>
+    </div>
+    <div class="secoundpage_container">
+        <div class="row text-center my-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box">
+                    <h3>Automated Feeding</h3>
+                    <p>Easily schedule or manually feed your fish from anywhere, ensuring they are always cared for with the Smart Fish Feeder.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box">
+                    <h3>Water Quality Monitoring</h3>
+                    <p>Monitor critical water parameters, including pH levels, with real-time updates both on your LCD display and smartphone.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box">
+                    <h3>Food Level Alerts</h3>
+                    <p>Stay informed with ultrasonic sensors that track food level, ensuring your fish have the ideal environment at all times.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row text-center my-4">
+            <div class="col-lg-6 col-md-12">
+                <div class="feature-box">
+                    <h3>Remote Control</h3>
+                    <p>Control the lights and oxygen motor remotely from your phone, offering full customization of the aquarium environment for optimal health.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="feature-box">
+                    <h3>LCD Display</h3>
+                    <p>A sleek LCD display mounted on the fish tank provides instant insights into food levels, water quality, and more, right at a glance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+
+    <div class="additional_container my-5">
+        <h2 class="text-center">An Array of Smart Monitoring Resources</h2>
+        <p class="text-center">Our innovative fish tank management system integrates a suite of smart features, accessible directly from your smartphone. Monitor, control, and optimize your aquarium’s environment with ease, ensuring your fish thrive with minimal effort.</p>
+        
+        <div class="row text-center my-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box">
+                    <h3>Monitor through Cloud</h3>
+                    <ul>
+                        <li>Monitor Food Level</li>
+                        <li>Monitor Water Quality</li>
+                    </ul>
+                    <img src="img/update1.png" alt="Food Level Monitoring" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box">
+                    <h3>Control through Cloud</h3>
+                    <ul>
+                        <li>Control Fish Feeder</li>
+                        <li>Control Oxygen Motor</li>
+                        <li>Control Lights</li>
+                    </ul>
+                    <img src="img/update2.png" alt="Cloud Control" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Components container -->
+    <div class="components_container">
+        <div class="box1">
+            <h1 class="nav-link" id="Component">Project Components</h1>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="Measures the acidity or alkalinity of water.">
+                        <img src="img/img components/PH.jpeg" alt="PH Sensor" class="img-fluid">
+                        <p>PH Sensor</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="A platform for prototyping electronic circuits.">
+                        <img src="img/img components/BOARD.jpeg" alt="Breadboard" class="img-fluid">
+                        <p>Breadboard</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="A microcontroller board based on the ATmega328P.">
+                        <img src="img/img components/UNO.jpg" alt="Arduino UNO" class="img-fluid">
+                        <p>Arduino UNO</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="An expansion board that allows the Arduino to connect to the internet.">
+                        <img src="img/img components/Ethernet shield.jpg" alt="Ethernet Shield" class="img-fluid">
+                        <p>Ethernet Shield</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="Measures distance and detects objects using ultrasonic sound.">
+                        <img src="img/img components/ULTRA.jpeg" alt="Sensor" class="img-fluid">
+                        <p>Sensor</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="Used to control the movement of robotic arms or similar devices.">
+                        <img src="img/img components/SEVO.jpeg" alt="Servo Motor" class="img-fluid">
+                        <p>Servo Motor</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="An electronic switch to control high-voltage devices.">
+                        <img src="img/img components/relay.png" alt="Relay Module" class="img-fluid">
+                        <p>Relay Module</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="Provides light in various applications.">
+                        <img src="img/img components/LED.jpg" alt="LED Light" class="img-fluid">
+                        <p>LED Light</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="box" data-toggle="tooltip" data-placement="top" title="Used to add oxygen to water for aquatic life.">
+                        <img src="img/img components/OXYGEN MOTER.jpeg" alt="Oxygen Motor" class="img-fluid">
+                        <p>Oxygen Motor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Side Panel for Details -->
+        <div id="sidePanel" style="display:none; position:fixed; right:0; top:0; width:300px; height:100%; background-color:white; box-shadow: -2px 0 5px rgba(0,0,0,0.5); padding: 20px; z-index: 1000;">
+            <h5 id="componentTitle">Component Title</h5>
+            <p id="componentDescription">Detailed description will go here.</p>
+            <button onclick="closePanel()">Close</button>
+        </div>
+        
+        
+        
+        
+    </div>
+
+    <!-- Showcase container -->
+    <div class="Showcase_container">
+        <div class="box1">
+            <h1>Your Title Here</h1>
+        </div>
+        <div class="cover">
+            <div class="list">
+                <img src="img/img3.jpg" alt="Image 3">
+                <img src="img/img2.jpg" alt="Image 2">
+                <img src="img/img1.jpg" alt="Image 1">
+                <img src="img/img5.jpg" alt="Image 5">
+                <video autoplay loop muted>
+                    <source src="img/0928.mp4" type="video/mp4">
+                </video>
+                <img src="img/img6.jpg" alt="Image 6">
+                <img src="img/img8.jpg" alt="Image 8">
+                <img src="img/img9.jpg" alt="Image 9">
+                <img src="img/img11.jpg" alt="Image 11">
+                <video autoplay loop muted>
+                    <source src="img/video2.mp4" type="video/mp4">
+                </video>
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.04_2c4ee912.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.04_68a3a16a.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.05_7f79c758.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.05_b87c8ed6.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.06_4ae45620.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.06_4ae45620.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.07_a9ad2d6e.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.08_5d29094f.jpg" alt="">
+                <img src="img/img new/WhatsApp Image 2024-10-01 at 21.06.09_c490bea7.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>Your Company Name</h2>
+                <p>
+                    Brief description of your company, its mission, or services offered.
+                </p>
+            </div>
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h2>Contact Us</h2>
+                <p>Email: info@yourcompany.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Main St, City, Country</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Your Company Name | All rights reserved.
+        </div>
+    </footer>
+    
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        // Initialize Bootstrap tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+    
+        // Handle click event to show side panel with details
+        $('.box').on('click', function() {
+            const title = $(this).find('p').text(); // Get the component name
+            const description = getDescription(title); // Get the detailed description based on the title
+            
+            $('#componentTitle').text(title); // Set the title
+            $('#componentDescription').text(description); // Set the description
+            $('#sidePanel').fadeIn(); // Show the side panel
+        });
+    });
+    
+    // Function to get the description based on the component title
+    function getDescription(title) {
+        const descriptions = {
+            "PH Sensor": "The PH sensor measures the acidity or alkalinity of water, which is crucial for maintaining a healthy aquatic environment. It ensures that the water conditions are optimal for fish and other aquatic life.",
+            "Breadboard": "A breadboard is a reusable platform used to create electronic circuits without soldering. It allows for easy component placement and rearrangement, making it ideal for prototyping.",
+            "Arduino UNO": "The Arduino UNO is a microcontroller board based on the ATmega328P. It's widely used in electronic projects due to its simplicity and versatility, allowing for easy integration with various sensors and modules.",
+            "Ethernet Shield": "The Ethernet shield enables the Arduino to connect to the internet, allowing for remote monitoring and control of the fish feeding and water quality monitoring system.",
+            "Sensor": "This ultrasonic sensor measures distance by emitting sound waves and timing how long it takes for the echo to return. It can be used for various applications, including detecting water levels.",
+            "Servo Motor": "A servo motor is a rotary actuator that allows for precise control of angular position. It's commonly used in robotics and automation applications, such as controlling the movement of feeding mechanisms.",
+            "Relay Module": "The relay module acts as an electronic switch, allowing low-power microcontrollers like the Arduino to control high-voltage devices safely, enabling automation in the feeding and monitoring system.",
+            "LED Light": "LED lights are energy-efficient lighting solutions that can be used to provide illumination in aquariums or to indicate the status of the system.",
+            "Oxygen Motor": "The oxygen motor helps to aerate the water, ensuring that fish have enough oxygen to thrive. It can be controlled automatically based on water quality readings."
+        };
+        return descriptions[title] || "Description not available.";
+    }
+    
+    // Function to close the side panel
+    function closePanel() {
+        $('#sidePanel').fadeOut(); // Hide the side panel
+    }
+    </script>
+    <script>
+        // JavaScript to highlight the active section
+        const sections = document.querySelectorAll('div[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+    
+        window.addEventListener('scroll', () => {
+            let current = '';
+    
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+    
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+    
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
